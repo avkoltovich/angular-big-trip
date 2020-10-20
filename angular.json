@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-big-trip"
+    }
+  },
+  "defaultProject": "angular-big-trip",
+  "cli": {
+    "analytics": false
+  }
 }
