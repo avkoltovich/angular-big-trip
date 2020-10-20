@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http'
 import { StoreModule } from '@ngrx/store'
 import { coreReducer } from './core/state/reducers'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { EffectsModule } from '@ngrx/effects'
+import { CoreEffect } from './core/state/effects'
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25
-    })
+    }),
+    EffectsModule.forRoot([ CoreEffect ])
   ],
   providers: [],
   bootstrap: [AppComponent]

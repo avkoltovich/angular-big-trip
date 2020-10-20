@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
 import { initApp } from './actions'
 import { switchMap, tap } from 'rxjs/operators'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 @Injectable()
 export class CoreEffect {
@@ -13,11 +13,18 @@ export class CoreEffect {
 
   }
 
-  @Effect()
+  @Effect({dispatch: false})
   public initApp$ = this.actions$.pipe(
     ofType(initApp),
-    tap(() => {
-      console.log('Hello!')
-    }) 
+    switchMap(() => {
+      return this.http.get('https://11.ecmascript.pages.academy/big-trip/destinations', {
+        headers: new HttpHeaders({
+          Authorization: 'Basic eo0w5110ik898199'
+        })
+      })
+    }),
+    tap((data) => {
+      console.log(data)
+    })
   )
 }
