@@ -8,10 +8,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { appReducer } from './state/reducers';
 import { AppEffect } from './state/effects';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderInfoComponent } from './components/header-info/header-info.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderInfoComponent
   ],
   imports: [
     BrowserModule,
