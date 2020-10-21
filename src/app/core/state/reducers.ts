@@ -1,19 +1,18 @@
-import { Action, createReducer, on } from "@ngrx/store";
-import { initApp } from './actions';
+import { Action, createReducer, on } from '@ngrx/store'
+import { IState } from '../models/models';
+import { initApp, storeDataAfterInitApp } from './actions'
 
-export interface State {
-  appInit: boolean
+export const initialState: IState = {
+  destinations: null,
+  offers: null,
+  points: null
 }
 
-export const initialState: State = {
-  appInit: false
-}
-
-const _coreReducer = createReducer(
+const privateCoreReducer = createReducer(
   initialState,
-  on(initApp, state => ({ ...state, appInit: true }))
+  on(storeDataAfterInitApp, (state, { destinations, offers, points }) => ({ ...state, destinations, offers, points }))
 );
 
-export function coreReducer(state: State | undefined, action: Action) {
-  return _coreReducer(state, action);
+export const coreReducer = (state: IState | undefined, action: Action) => {
+  return privateCoreReducer(state, action)
 }

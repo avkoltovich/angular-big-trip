@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { initApp } from '../state/actions';
+import { Component, OnInit } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { initApp } from '../state/actions'
 
 @Component({
   selector: 'app-core',
