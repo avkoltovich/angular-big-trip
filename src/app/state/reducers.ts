@@ -8,11 +8,11 @@ export const initialState: IState = {
   points: null
 }
 
-const privateAppReducer = createReducer(
+const privateRootReducer = createReducer(
   initialState,
   on(storeDataAfterInitApp, (state, { destinations, offers, points }) => ({ ...state, destinations, offers, points }))
 );
 
-export const appReducer = (state: IState | undefined, action: Action) => {
-  return privateAppReducer(state, action)
+export const rootReducer = (state: IState | undefined, action: Action) => {
+  return privateRootReducer(state, action)
 }

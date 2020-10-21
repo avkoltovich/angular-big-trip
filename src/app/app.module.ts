@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { appReducer } from './state/reducers';
+import { rootReducer } from './state/reducers';
 import { AppEffect } from './state/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderInfoComponent } from './components/header-info/header-info.component';
@@ -19,7 +19,7 @@ import { HeaderInfoComponent } from './components/header-info/header-info.compon
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot({
-      app: appReducer
+      root: rootReducer
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25
