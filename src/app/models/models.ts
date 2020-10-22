@@ -21,7 +21,18 @@ export interface IOffersByType {
   offers: IOffer[]
 }
 
-export interface IPoints {
+export interface IPoint {
+  basePrice: number
+  dateFrom: string
+  dateTo: string
+  destination: IDestination
+  id: string
+  isFavorite: boolean
+  offers: IOffer[]
+  type: Type
+}
+
+export interface IPointRaw {
   base_price: number
   date_from: string
   date_to: string

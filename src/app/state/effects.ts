@@ -4,6 +4,7 @@ import { initApp, storeDataAfterInitApp } from './actions'
 import { map, switchMap, tap } from 'rxjs/operators'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { combineLatest } from 'rxjs'
+import { IDestination, IOffersByType, IPoint, IPointRaw } from '../models/models'
 
 const BASE_URL = 'https://11.ecmascript.pages.academy/big-trip'
 
@@ -23,16 +24,22 @@ export class AppEffect {
     ofType(initApp),
     switchMap(() => {
       return combineLatest([
-        this.http.get(`${ BASE_URL }/destinations`, { headers }),
-        this.http.get(`${ BASE_URL }/offers`, { headers }),
-        this.http.get(`${ BASE_URL }/points`, { headers })
+        this.http.get<IDestination[]>(`${ BASE_URL }/destinations`, { headers }),
+        this.http.get<IOffersByType[]>(`${ BASE_URL }/offers`, { headers }),
+        this.http.get<IPointRaw[]>(`${ BASE_URL }/points`, { headers })
       ])
     })
   ).pipe(
     map(([destinations, offers, points]) => storeDataAfterInitApp({
       destinations,
       offers,
-      points
+      points: points.map((point): IPoint => ({
+        ...point,
+        basePrice: point.base_price,
+        dateFrom: point.date_from,
+        dateTo: point.date_to,
+        isFavorite: point.is_favorite
+      }))
     }))
   )
 }
