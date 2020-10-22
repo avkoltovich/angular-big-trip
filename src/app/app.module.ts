@@ -11,13 +11,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderInfoComponent } from './components/header-info/header-info.component';
 import { HeaderMenuComponent } from './components/header-menu/header-menu.component';
 import { HeaderFilterComponent } from './components/header-filter/header-filter.component';
+import { TripListComponent } from './components/trip-list/trip-list.component';
+import { TripSortingComponent } from './components/trip-sorting/trip-sorting.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderInfoComponent,
     HeaderMenuComponent,
-    HeaderFilterComponent
+    HeaderFilterComponent,
+    TripListComponent,
+    TripSortingComponent
   ],
   imports: [
     BrowserModule,
