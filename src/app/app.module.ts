@@ -9,11 +9,15 @@ import { rootReducer } from './state/reducers';
 import { AppEffect } from './state/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderInfoComponent } from './components/header-info/header-info.component';
+import { HeaderMenuComponent } from './components/header-menu/header-menu.component';
+import { HeaderFilterComponent } from './components/header-filter/header-filter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderInfoComponent
+    HeaderInfoComponent,
+    HeaderMenuComponent,
+    HeaderFilterComponent
   ],
   imports: [
     BrowserModule,
