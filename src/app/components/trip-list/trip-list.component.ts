@@ -15,6 +15,19 @@ import { selectPoints } from 'src/app/state/selectors';
   styleUrls: ['./trip-list.component.css']
 })
 export class TripListComponent implements OnInit {
+  public eventTypesMap = {
+    'taxi': `Taxi to `,
+    'bus': `Bus to `,
+    'train': `Train to `,
+    'ship': `Ship to `,
+    'transport': `Transport to `,
+    'drive': `Drive to `,
+    'flight': `Flight to `,
+    'check-in': `Check-in in `,
+    'sightseeing': `Sightseeing in `,
+    'restaurant': `Restaurant in `
+  }
+
   public pointsGroupedByDays$: Observable<IPointsGroupedByDays[]> = this.actions$.pipe(
     ofType(storeDataAfterInitApp),
     switchMap(() => this.store$.pipe(
@@ -60,4 +73,13 @@ export class TripListComponent implements OnInit {
     return (new Date(Date.parse(end) - Date.parse(start))).getDate();
   }
 
+  private getISOStringDate(date: string): string {
+    const isoDate = new Date(date)
+    isoDate.setHours(isoDate.getHours() - isoDate.getTimezoneOffset() / 60)
+    return isoDate.toISOString()
+  }
+
+  private getFormatTime24H(date: string): string {
+    return format(parseISO(date), 'HH:mm')
+  }
 }
