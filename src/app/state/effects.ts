@@ -34,12 +34,15 @@ export class AppEffect {
       destinations,
       offers,
       points: points.map((point): IPoint => ({
-        ...point,
-        basePrice: point.base_price,
         dateFrom: point.date_from,
         dateTo: point.date_to,
+        type: point.type,
+        offers: point.offers,
+        id: point.id,
+        destination: point.destination,
+        basePrice: point.base_price,
         isFavorite: point.is_favorite
-      }))
+      })).sort((a, b) => Date.parse(a[`dateFrom`]) - Date.parse(b[`dateFrom`]))
     }))
   )
 }

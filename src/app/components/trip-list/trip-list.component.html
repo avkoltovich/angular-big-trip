@@ -1,8 +1,11 @@
 <ul class="trip-days">
-  <li class="trip-days__item  day">
+  <li
+    class="trip-days__item  day"
+    *ngFor="let point of pointsGroupedByDays$ | async"
+  >
     <div class="day__info">
-      <span class="day__counter">1</span>
-        <time class="day__date" datetime="${dateTime}">OCT 9</time>
+      <span class="day__counter">{{ point.daysPassed }}</span>
+        <time class="day__date" datetime="${dateTime}">{{ point.date }}</time>
     </div>
     <ul class="trip-events__list">
       <li class="trip-events__item">

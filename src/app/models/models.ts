@@ -32,6 +32,12 @@ export interface IPoint {
   type: Type
 }
 
+export interface IPointsGroupedByDays {
+  daysPassed: number
+  date: string
+  points: IPoint[]
+}
+
 export interface IPointRaw {
   base_price: number
   date_from: string

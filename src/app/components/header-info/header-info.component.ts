@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Actions, ofType } from '@ngrx/effects'
 import { Observable } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
-import { IOffer, IPoint, IState } from 'src/app/models/models';
-import { selectPoints, selectRootState } from 'src/app/state/selectors';
+import { IOffer, IPoint } from 'src/app/models/models';
+import { selectPoints } from 'src/app/state/selectors';
 import { storeDataAfterInitApp } from 'src/app/state/actions';
 import { format } from 'date-fns';
 import { parseISO } from 'date-fns/fp';
