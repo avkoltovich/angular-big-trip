@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { format, formatDuration } from 'date-fns'
-import { parseISO } from 'date-fns/fp';
+import { differenceInDays, differenceInHours, differenceInMinutes, parseISO } from 'date-fns/fp';
 import { Observable } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { IPoint, IPointsGroupedByDays } from 'src/app/models/models';
@@ -83,20 +83,29 @@ export class TripListComponent implements OnInit {
     return format(parseISO(date), 'HH:mm')
   }
 
+  private _castTimeFormat(value) {
+    return String(value).padStart(2, `0`);
+  };
+
   public getDurationString(dateFrom: string, dateTo: string): string {
-    const days = new Date(Date.parse(dateTo) - Date.parse(dateFrom)).getDay()
-    const hours = new Date(Date.parse(dateTo) - Date.parse(dateFrom)).getHours()
-    const minutes = new Date(Date.parse(dateTo) - Date.parse(dateFrom)).getMinutes()
-    let formattedDuration = ``
+    let duration = (Date.parse(dateTo) - Date.parse(dateFrom)) / 60000;
+    let days = ``;
+    let hours = ``;
 
-    if (days) {
-      formattedDuration = `${days}D `
+    if (duration >= 1440) {
+      days = `${Math.floor(duration / 1440)}D `;
+      duration = duration - parseInt(days, 10) * 1440;
+      hours = `00H `;
     }
 
-    if (days || hours) {
-      formattedDuration += `${hours}H `
+    if (duration >= 60) {
+      hours = `${this._castTimeFormat(Math.floor(duration / 60))}H `;
+      duration = duration - parseInt(hours, 10) * 60;
     }
 
-    return (formattedDuration += `${minutes}M`)
+    const minutes = `${this._castTimeFormat(Math.floor(duration))}M`;
+
+    return days + hours + minutes
   }
 }
+
