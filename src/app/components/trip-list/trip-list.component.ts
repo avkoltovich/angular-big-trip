@@ -15,7 +15,7 @@ import { selectPoints } from 'src/app/state/selectors';
   styleUrls: ['./trip-list.component.css']
 })
 export class TripListComponent implements OnInit {
-  public eventTypesMap = {
+  readonly eventTypesMap = {
     'taxi': `Taxi to `,
     'bus': `Bus to `,
     'train': `Train to `,
@@ -83,12 +83,12 @@ export class TripListComponent implements OnInit {
     return format(parseISO(date), 'HH:mm')
   }
 
-  private _castTimeFormat(value) {
+  private _castTimeFormat(value: number): string {
     return String(value).padStart(2, `0`);
   };
 
   public getDurationString(dateFrom: string, dateTo: string): string {
-    let duration = (Date.parse(dateTo) - Date.parse(dateFrom)) / 60000;
+    let duration: number = (Date.parse(dateTo) - Date.parse(dateFrom)) / 60000;
     let days = ``;
     let hours = ``;
 

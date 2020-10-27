@@ -42,14 +42,21 @@
           </div>
 
           <p class="event__price">
-            &euro;&nbsp;<span class="event__price-value">
+            &euro;<span class="event__price-value">
               {{ point.basePrice }}
             </span>
           </p>
 
           <h4 class="visually-hidden">Offers:</h4>
           <ul class="event__selected-offers">
-            <!-- ${selectedOffers} -->
+            <li
+             class="event__offer"
+             *ngFor="let offer of point.offers | slice:0:3"
+            >
+              <span class="event__offer-title">{{ offer.title }}</span>
+              +
+              &euro;&nbsp;<span class="event__offer-price">{{ offer.price }}</span>
+            </li>
           </ul>
 
           <button class="event__rollup-btn" type="button">
