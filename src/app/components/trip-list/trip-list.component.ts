@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
-import { format } from 'date-fns';
+import { format, formatDuration } from 'date-fns'
 import { parseISO } from 'date-fns/fp';
 import { Observable } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
@@ -73,13 +73,30 @@ export class TripListComponent implements OnInit {
     return (new Date(Date.parse(end) - Date.parse(start))).getDate();
   }
 
-  private getISOStringDate(date: string): string {
+  public getISOStringDate(date: string): string {
     const isoDate = new Date(date)
     isoDate.setHours(isoDate.getHours() - isoDate.getTimezoneOffset() / 60)
     return isoDate.toISOString()
   }
 
-  private getFormatTime24H(date: string): string {
+  public getFormatTime24H(date: string): string {
     return format(parseISO(date), 'HH:mm')
+  }
+
+  public getDurationString(dateFrom: string, dateTo: string): string {
+    const days = new Date(Date.parse(dateTo) - Date.parse(dateFrom)).getDay()
+    const hours = new Date(Date.parse(dateTo) - Date.parse(dateFrom)).getHours()
+    const minutes = new Date(Date.parse(dateTo) - Date.parse(dateFrom)).getMinutes()
+    let formattedDuration = ``
+
+    if (days) {
+      formattedDuration = `${days}D `
+    }
+
+    if (days || hours) {
+      formattedDuration += `${hours}H `
+    }
+
+    return (formattedDuration += `${minutes}M`)
   }
 }
