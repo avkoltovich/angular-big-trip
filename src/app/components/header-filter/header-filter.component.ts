@@ -3,31 +3,14 @@ import { Store } from '@ngrx/store';
 import { Filter } from 'src/app/models/models';
 import { updateCurrentFilter } from 'src/app/state/actions';
 
-interface IFilter {
-  name: Filter
-  checked: boolean
-}
-
 @Component({
   selector: 'app-header-filter',
   templateUrl: './header-filter.component.html',
   styleUrls: ['./header-filter.component.css']
 })
 export class HeaderFilterComponent {
-  public filters: IFilter[] = [
-    {
-      name: Filter.everything,
-      checked: true
-    },
-    {
-      name: Filter.future,
-      checked: false
-    },
-    {
-      name: Filter.past,
-      checked: false
-    }
-  ]
+  public filters: Filter[] = Object.values(Filter)
+  public filterCheckedOnInit: Filter = Filter.everything
 
   constructor(private store$: Store) { }
 

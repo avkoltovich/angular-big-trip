@@ -4,19 +4,19 @@
    *ngFor="let filter of filters"
   >
     <input
-      id="{{ 'filter-' + filter.name }}"
+      id="{{ 'filter-' + filter }}"
       class="trip-filters__filter-input  visually-hidden"
       type="radio"
       name="trip-filter"
-      value="{{ filter.name }}"
-      [checked]="filter.checked"
-      (click)="onFilterClick(filter.name)"
+      value="{{ filter }}"
+      [checked]="filter === filterCheckedOnInit"
+      (click)="onFilterClick(filter)"
     />
     <label
      class="trip-filters__filter-label"
-    for="{{ 'filter-' + filter.name }}"
+    for="{{ 'filter-' + filter }}"
     >
-      {{ filter.name }}
+      {{ filter }}
     </label>
   </div>
   <button class="visually-hidden" type="submit">Accept filter</button>

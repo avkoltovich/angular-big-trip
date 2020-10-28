@@ -3,21 +3,21 @@
 
   <div
     *ngFor="let sorting of sortingTypes"
-    class="{{ 'trip-sort__item  trip-sort__item--' + sorting.name }}"
+    class="{{ 'trip-sort__item  trip-sort__item--' + sorting }}"
   >
     <input
-      id="{{ 'sort-' + sorting.name }}"
+      id="{{ 'sort-' + sorting }}"
       class="trip-sort__input  visually-hidden"
       type="radio"
       name="trip-sort"
-      value="{{ sorting.name }}"
-      [checked]="sorting.checked"
-      (click)="onSortingClick(sorting.name)"
+      value="{{ sorting }}"
+      [checked]="sorting === sortingCheckedOnInit"
+      (click)="onSortingClick(sorting)"
     >
-    <label class="trip-sort__btn" for="{{ 'sort-' + sorting.name }}">
-      {{ sorting.name }}
+    <label class="trip-sort__btn" for="{{ 'sort-' + sorting }}">
+      {{ sorting }}
     </label>
   </div>
-  
+
   <span class="trip-sort__item  trip-sort__item--offers">Offers</span>
 </form>
