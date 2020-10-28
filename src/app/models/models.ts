@@ -50,20 +50,20 @@ export interface IPointRaw {
 }
 
 export enum Table {
-  'table',
-  'stats'
+  table = 'table',
+  stats = 'stats'
 }
 
 export enum Filter {
-  'everything',
-  'future',
-  'past'
+  everything = 'everything',
+  future = 'future',
+  past = 'past'
 }
 
 export enum Sorting {
-  'event',
-  'time',
-  'price'
+  event = 'event',
+  time = 'time',
+  price = 'price'
 }
 
 export interface IState {

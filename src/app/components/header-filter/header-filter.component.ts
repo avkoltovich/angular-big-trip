@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Filter } from 'src/app/models/models';
+import { updateCurrentFilter } from 'src/app/state/actions';
 
 interface IFilter {
-  name: string
+  name: Filter
   checked: boolean
 }
 
@@ -10,25 +13,27 @@ interface IFilter {
   templateUrl: './header-filter.component.html',
   styleUrls: ['./header-filter.component.css']
 })
-export class HeaderFilterComponent implements OnInit {
+export class HeaderFilterComponent {
   public filters: IFilter[] = [
     {
-      name: `everything`,
+      name: Filter.everything,
       checked: true
     },
     {
-      name: `future`,
+      name: Filter.future,
       checked: false
     },
     {
-      name: `past`,
+      name: Filter.past,
       checked: false
     }
   ]
 
-  constructor() { }
+  constructor(private store$: Store) { }
 
-  ngOnInit(): void {
+  public onFilterClick(selectedFilter: Filter) {
+    this.store$.dispatch(updateCurrentFilter({
+      currentFilter: selectedFilter
+    }))
   }
-
 }

@@ -10,6 +10,7 @@
       name="trip-filter"
       value="{{ filter.name }}"
       [checked]="filter.checked"
+      (click)="onFilterClick(filter.name)"
     />
     <label
      class="trip-filters__filter-label"
