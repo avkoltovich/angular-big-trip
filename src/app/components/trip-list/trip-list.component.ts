@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
-import { format, formatDuration } from 'date-fns'
-import { differenceInDays, differenceInHours, differenceInMinutes, parseISO } from 'date-fns/fp';
+import { format } from 'date-fns'
+import { parseISO } from 'date-fns/fp';
 import { Observable } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
-import { IPoint, IPointsGroupedByDays } from 'src/app/models/models';
+import { IPointsGroupedByDays } from 'src/app/models/models';
 import { storeDataAfterInitApp } from 'src/app/state/actions';
 import { selectPoints } from 'src/app/state/selectors';
 
@@ -39,12 +39,12 @@ export class TripListComponent implements OnInit {
       const pointsGroupedByDays: IPointsGroupedByDays[] = []
       let startDate: string
       let currentDate: string
-      let previusDate: string
+      let previousDate: string
       let daysPassed: number
       points.forEach((point) => {
         currentDate = point.dateFrom.slice(0, 10)
 
-        if (previusDate !== currentDate) {
+        if (previousDate !== currentDate) {
           startDate = startDate ? startDate : currentDate;
           daysPassed = daysPassed ? this._getPassedDays(startDate, currentDate) : 1;
           pointsGroupedByDays.push({
@@ -53,10 +53,10 @@ export class TripListComponent implements OnInit {
             points: [ point ]
           })
 
-          previusDate = currentDate
+          previousDate = currentDate
         } else {
           pointsGroupedByDays[pointsGroupedByDays.length - 1].points.push(point)
-          previusDate = currentDate
+          previousDate = currentDate
         }
       })
       return pointsGroupedByDays
