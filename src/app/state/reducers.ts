@@ -1,11 +1,14 @@
 import { Action, createReducer, on } from '@ngrx/store'
-import { IState } from '../models/models';
+import { Filter, IState, Sorting, Table } from '../models/models';
 import { storeDataAfterInitApp } from './actions'
 
 export const initialState: IState = {
   destinations: null,
   offers: null,
-  points: null
+  points: null,
+  currentTable: Table.table,
+  currentFilter: Filter.everything,
+  currentSorting: Sorting.event
 }
 
 const privateRootReducer = createReducer(

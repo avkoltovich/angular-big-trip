@@ -49,10 +49,30 @@ export interface IPointRaw {
   type: Type
 }
 
+export enum Table {
+  'table',
+  'stats'
+}
+
+export enum Filter {
+  'everything',
+  'future',
+  'past'
+}
+
+export enum Sorting {
+  'event',
+  'time',
+  'price'
+}
+
 export interface IState {
   destinations: IDestination[]
   offers: IOffersByType[]
   points: any
+  currentTable: Table
+  currentFilter: Filter
+  currentSorting: Sorting
 }
 
 export interface IRootState {
