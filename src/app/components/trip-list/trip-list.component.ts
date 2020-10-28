@@ -83,10 +83,6 @@ export class TripListComponent implements OnInit {
     return format(parseISO(date), 'HH:mm')
   }
 
-  private _castTimeFormat(value: number): string {
-    return String(value).padStart(2, `0`);
-  };
-
   public getDurationString(dateFrom: string, dateTo: string): string {
     let duration: number = (Date.parse(dateTo) - Date.parse(dateFrom)) / 60000;
     let days = ``;
@@ -95,15 +91,15 @@ export class TripListComponent implements OnInit {
     if (duration >= 1440) {
       days = `${Math.floor(duration / 1440)}D `;
       duration = duration - parseInt(days, 10) * 1440;
-      hours = `00H `;
+      hours = `0H `;
     }
 
     if (duration >= 60) {
-      hours = `${this._castTimeFormat(Math.floor(duration / 60))}H `;
+      hours = `${Math.floor(duration / 60)}H `;
       duration = duration - parseInt(hours, 10) * 60;
     }
 
-    const minutes = `${this._castTimeFormat(Math.floor(duration))}M`;
+    const minutes = `${Math.floor(duration)}M`;
 
     return days + hours + minutes
   }
