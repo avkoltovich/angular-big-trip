@@ -4,8 +4,8 @@ import { select, Store } from '@ngrx/store';
 import { format } from 'date-fns'
 import { parseISO } from 'date-fns/fp';
 import { Observable } from 'rxjs';
-import { map, switchMap, take, tap } from 'rxjs/operators';
-import { IPointsGroupedByDays } from 'src/app/models/models';
+import { map, switchMap, take } from 'rxjs/operators';
+import { IPoint, IPointsGroupedByDays } from 'src/app/models/models';
 import { storeDataAfterInitApp } from 'src/app/state/actions';
 import { selectPoints } from 'src/app/state/selectors';
 
@@ -35,13 +35,13 @@ export class TripListComponent implements OnInit {
         take(1)
         )
     ),
-    map((points) => {
+    map((points: IPoint[]) => {
       const pointsGroupedByDays: IPointsGroupedByDays[] = []
       let startDate: string
       let currentDate: string
       let previousDate: string
       let daysPassed: number
-      points.forEach((point) => {
+      points.forEach((point: IPoint) => {
         currentDate = point.dateFrom.slice(0, 10)
 
         if (previousDate !== currentDate) {
